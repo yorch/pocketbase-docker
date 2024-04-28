@@ -9,16 +9,14 @@ The most important file is `Dockerfile` that define the image and later for buil
 - Read the `Dockerfile`. That's the core file to build the image.
 - Pocketbase will expose port `8090` inside the container (as defined on `Dockerfile` file).
 - Pocketbase will use volume called `pocketbase-volume` for data persistent storage (as defined in `docker-compose.yml`).
-- Pocketbase will use `/app/data/pb_data` to store data and `/app/data/pb_public` to store data that public facing to users, such as HTML, CSS, images, JS etc. 
-- Update `POCKETBASE_VERSION` on `Dockerfile` to the latest version. See the latest version number at at https://github.com/pocketbase/pocketbase/releases. I will try to update the version number as often as I can.
+- Pocketbase will use `/app/data/pb_data` to store data and `/app/data/pb_public` to store data that public facing to users, such as HTML, CSS, images, JS etc.
+- Update `POCKETBASE_VERSION` on `Dockerfile` to the latest version. See the latest version number at at <https://github.com/pocketbase/pocketbase/releases>. I will try to update the version number as often as I can.
 
 ## Docker Compose (typical scenario)
 
 This is for you that need to quickly spin up Pocketbase and run on your host (localhost or on cloud). You can adjust it. As you can see, I define `volumes` to make data persistent if you stop the container.
 
 ```
-version: '3.9'
-
 services:
   pocketbase:
     container_name: pocketbase
@@ -34,9 +32,10 @@ volumes:
     name: pocketbase-volume
 ```
 
-Run it with `docker compose up -d`. At this point we already can run Pocketbase on http://localhost:8090/.
-- Admin page go to http://localhost:8090/_/
-- API URI on the http://localhost:8090/api/
+Run it with `docker compose up -d`. At this point we already can run Pocketbase on <http://localhost:8090/>.
+
+- Admin page go to <http://localhost:8090/_/>
+- API URI on the <http://localhost:8090/api/>
 
 Run `docker inspect pocketbase` for more details.
 
@@ -50,7 +49,7 @@ Let say you have domain `example.com` and you already create subdomain `api.exam
 server {
   listen 80;
   listen [::]:80;
-  
+
   server_name api.example.com; # adjust this to your domain
 
   return 301 https://api.example.com$request_uri; # adjust this to your URI
@@ -81,19 +80,19 @@ server {
 }
 ```
 
-At this point you will have Pocketbase on https://api.example.com
+At this point you will have Pocketbase on <https://api.example.com>
 
-Remember https://api.example.com/_/ to access the Admin page and https://api.example.com/api/ is the API endpoint.
+Remember <https://api.example.com/_/> to access the Admin page and <https://api.example.com/api/> is the API endpoint.
 
 ## Nginx config (using reverse proxy and using base path)
 
-This scenario will assume you have URL https://api.example.com/ (similar like previous Nginx scenario) but the Pocketbase will be on the base path called `pocketbase` so the end result will be like https://api.example.com/pocketbase
+This scenario will assume you have URL <https://api.example.com/> (similar like previous Nginx scenario) but the Pocketbase will be on the base path called `pocketbase` so the end result will be like <https://api.example.com/pocketbase>
 
 ```
 server {
   listen 80;
   listen [::]:80;
-  
+
   server_name api.example.com; # adjust this to your domain
 
   return 301 https://api.example.com$request_uri; # adjust this to your URI
@@ -126,9 +125,9 @@ server {
 }
 ```
 
-At this point you will have Pocketbase on https://api.example.com/pocketbase
+At this point you will have Pocketbase on <https://api.example.com/pocketbase>
 
-Remember https://api.example.com/pocketbase/_/ to access the Admin page and https://api.example.com/pocketbase/api/ is the API endpoint.
+Remember <https://api.example.com/pocketbase/_/> to access the Admin page and <https://api.example.com/pocketbase/api/> is the API endpoint.
 
 ## Questions
 
@@ -138,10 +137,10 @@ If you still have any question please feel free to write to me on Discussions se
 
 Inspired and based on:
 
-- https://github.com/krushiraj/pocketbase-docker/blob/main/Dockerfile
-- https://github.com/bscott/pocketbase-docker/blob/main/Dockerfile
-- https://github.com/muchobien/pocketbase-docker
-- https://github.com/pocketbase/pocketbase/issues/92
+- <https://github.com/krushiraj/pocketbase-docker/blob/main/Dockerfile>
+- <https://github.com/bscott/pocketbase-docker/blob/main/Dockerfile>
+- <https://github.com/muchobien/pocketbase-docker>
+- <https://github.com/pocketbase/pocketbase/issues/92>
 
 Credits to [Gani Georgiev](https://github.com/ganigeorgiev) who created Pocketbase, it's great piece of software.
 
