@@ -3,11 +3,13 @@ services:
     container_name: pocketbase
     build: .
     image: pocketbase:latest
+    init: true
+    environment:
+      - PORT=${PORT}
     volumes:
-      - pocketbase-volume:/app/data
+      - data:/app/data
     ports:
-      - "8090:8090"
+      - "${PORT}:${PORT}"
 
 volumes:
-  pocketbase-volume:
-    name: pocketbase-volume
+  data:
